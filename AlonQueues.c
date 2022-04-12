@@ -141,3 +141,33 @@ int numOfItemsQueue(Queue* ptrQueue)
 
 	return (numOfItems);
 }
+
+//----------------------------------------------------------------------
+//								 Copy Queue
+//								 ----------
+//
+// General      : This function copies one queue into another
+//
+// Parameters   : 
+//			ptrQueueSource - A pointer to queue (Queue*)
+//			ptrQueueDestination - A pointer to queue (Queue*)
+//
+// Return Value : None.
+//
+//----------------------------------------------------------------------
+
+void copyQueue(Queue* ptrQueueSource, Queue* ptrQueueDestination) {
+	if (isQueueEmpty(ptrQueueSource)) return;
+
+	insertQueue(ptrQueueSource, FLAG_VALUE);
+
+	TYPE currentValue = removeQueue(ptrQueueSource);
+
+	while (currentValue != FLAG_VALUE) {
+		insertQueue(ptrQueueSource, currentValue);
+		insertQueue(ptrQueueDestination, currentValue);
+		currentValue = removeQueue(ptrQueueSource);
+	}
+
+	return;
+}
